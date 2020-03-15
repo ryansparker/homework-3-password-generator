@@ -2,22 +2,30 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var confirmLength = "";
-var confirmLowercase = "";
-var confirmUppercase = "";
-var confirmNumeric = "";
-var confirmSpecial = "";
 
-//function for generating password
-function generatePassword() {
+    //function for generating password
+    function generatePassword() {
     
+    //VARIABLES
+    var confirmLength = "";
+    var confirmLowercase = "";
+    var confirmUppercase = "";
+    var confirmNumeric = "";
+    var confirmSpecial = "";
+
+    var passValue = "";
+    var passDetails = "";
+    var passLength = "";
+
+    var finalPassword = "";
+
+    var special = "!@#$%^&*?()-_=+:<>/|";
+    var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var lowercase = "abcdefghijklmnopqrstuvwxyz";
+    var numeric = "0123456789";
+
     //PASSWORD LENGTH PROMPT
     confirmLength = prompt("Select between 8 and 128 characters for your password length:");
-
-    if (confirmLength <8 || confirmLength >128){
-        alert ("Password must be between 8 and 128 characters.");
-        prompt ("Select between 8 and 128 characters for your password length:");
-    }
     //LOWERCASE Y OR NO? PROMPT
     confirmLowercase = prompt ("Do you want lowercase characters: y or n?");
     //UPPERCASE Y OR NO? PROMPT
@@ -27,32 +35,39 @@ function generatePassword() {
     //SPECIAL Y OR NO? PROMPT
     confirmSpecial = prompt ("Do you want special characters: y or n?");
 
-    var password = '';
-    var special = "!@#$%^&*?()-_=+:<>/|";
-    var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var lowercase = "abcdefghijklmnopqrstuvwxyz";
-    var numeric = "0123456789";
-  
-
-for (var i = 0; i < confirmLength; i++) {
-
-    if (confirmLowercase === 'y' && confirmLength >= 8 || confirmLength <= 128) {
-        console.log(password += lowercase.charAt(Math.floor(Math.random) * lowercase.length));
+    if (confirmLength >= 8 && confirmLength <= 128) {
+        passValue = confirmLength;
+        
+    }
+    
+    if (confirmLowercase === 'y') {
+        passDetails += lowercase;
+       
     }
 
-    if (confirmUppercase === 'y' && confirmLength >= 8 || confirmLength <= 128) {
-        console.log(password += uppercase.charAt(Math.floor(Math.random) * uppercase.length));
+    if (confirmUppercase === 'y') {
+        passDetails += uppercase;  
+       
     }
 
-    if (confirmNumeric === 'y' && confirmLength >= 8 || confirmLength <= 128) {
-        console.log(password += numeric.charAt(Math.floor(Math.random) * numeric.length));
+    if (confirmNumeric === 'y') {
+        passDetails += numeric;
+        
     }
 
-    if (confirmSpecial === 'y' && confirmLength >= 8 || confirmLength <= 128) {
-        console.log(password += special.charAt(Math.floor(Math.random) * special.length));
+    if (confirmSpecial === 'y') {
+        passDetails += special;
+        
+    
     }
-}
-return password
+     passLength = passValue;
+
+    for (var i = 0; i < passLength; i++) {
+        finalPassword += passDetails.charAt(
+            Math.floor(Math.random() * passDetails.length));
+
+    }
+    alert("Here is your password: " + finalPassword); 
 }
 
 
@@ -61,7 +76,7 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+  
 
 }
 
